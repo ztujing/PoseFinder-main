@@ -298,153 +298,10 @@ extension ViewController: PoseNetDelegate {
             //ここに入れる
             //先生のポーズ
             let teacherPose = poses[0]
-            //空のポーズを作る
-            var teacherScaledPose = Pose()
-            //            teacherScaledPose = teacherPose
-            //先生の各部位のx、ｙ座標
-            //teacherPose.joints[nose].position.x
-            //teacherPose.joints[nose].position.y
-            //に変数をかけて計算後の座標へ代入する
             
-            //nose
-            if let joint =  teacherPose.joints[.nose] {
-                teacherScaledPose.joints[.nose]!.position.x = joint.position.x
-                teacherScaledPose.joints[.nose]!.position.y = joint.position.y
-                teacherScaledPose.joints[.nose]!.confidence = joint.confidence
-                teacherScaledPose.joints[.nose]!.isValid = joint.isValid
-            } else {
-                
-            }
-            //left
-            if let joint =  teacherPose.joints[.leftEye] {
-                teacherScaledPose.joints[.leftEye]!.position.x = joint.position.x
-                teacherScaledPose.joints[.leftEye]!.position.y = joint.position.y
-                teacherScaledPose.joints[.leftEye]!.confidence = joint.confidence
-                teacherScaledPose.joints[.leftEye]!.isValid = joint.isValid
-            } else {
-                
-            }
-            if let joint =  teacherPose.joints[.leftEar] {
-                teacherScaledPose.joints[.leftEar]!.position.x = joint.position.x
-                teacherScaledPose.joints[.leftEar]!.position.y = joint.position.y
-                teacherScaledPose.joints[.leftEar]!.confidence = joint.confidence
-                teacherScaledPose.joints[.leftEar]!.isValid = joint.isValid
-            } else {
-                
-            }
-            if let joint =  teacherPose.joints[.leftShoulder] {
-                teacherScaledPose.joints[.leftShoulder]!.position.x = joint.position.x
-                teacherScaledPose.joints[.leftShoulder]!.position.y = joint.position.y
-                teacherScaledPose.joints[.leftShoulder]!.confidence = joint.confidence
-                teacherScaledPose.joints[.leftShoulder]!.isValid = joint.isValid
-            } else {
-                
-            }
-            if let joint =  teacherPose.joints[.leftElbow] {
-                teacherScaledPose.joints[.leftElbow]!.position.x = joint.position.x
-                teacherScaledPose.joints[.leftElbow]!.position.y = joint.position.y
-                teacherScaledPose.joints[.leftElbow]!.confidence = joint.confidence
-                teacherScaledPose.joints[.leftElbow]!.isValid = joint.isValid
-            } else {
-                
-            }
-            if let joint =  teacherPose.joints[.leftWrist] {
-                teacherScaledPose.joints[.leftWrist]!.position.x = joint.position.x
-                teacherScaledPose.joints[.leftWrist]!.position.y = joint.position.y
-                teacherScaledPose.joints[.leftWrist]!.confidence = joint.confidence
-                teacherScaledPose.joints[.leftWrist]!.isValid = joint.isValid
-            } else {
-                
-            }
-            if let joint =  teacherPose.joints[.leftHip] {
-                teacherScaledPose.joints[.leftHip]!.position.x = joint.position.x
-                teacherScaledPose.joints[.leftHip]!.position.y = joint.position.y
-                teacherScaledPose.joints[.leftHip]!.confidence = joint.confidence
-                teacherScaledPose.joints[.leftHip]!.isValid = joint.isValid
-            } else {
-                
-            }
-            if let joint =  teacherPose.joints[.leftKnee] {
-                teacherScaledPose.joints[.leftKnee]!.position.x = joint.position.x
-                teacherScaledPose.joints[.leftKnee]!.position.y = joint.position.y
-                teacherScaledPose.joints[.leftKnee]!.confidence = joint.confidence
-                teacherScaledPose.joints[.leftKnee]!.isValid = joint.isValid
-            } else {
-                
-                //            }
-                if let joint =  teacherPose.joints[.leftAnkle] {
-                    teacherScaledPose.joints[.leftAnkle]!.position.x = joint.position.x
-                    teacherScaledPose.joints[.leftAnkle]!.position.y = joint.position.y
-                    teacherScaledPose.joints[.leftAnkle]!.confidence = joint.confidence
-                    teacherScaledPose.joints[.leftAnkle]!.isValid = joint.isValid
-                } else {
-                    
-                }
-                if let joint =  teacherPose.joints[.rightEye] {
-                    teacherScaledPose.joints[.rightEye]!.position.x = joint.position.x
-                    teacherScaledPose.joints[.rightEye]!.position.y = joint.position.y
-                    teacherScaledPose.joints[.rightEye]!.confidence = joint.confidence
-                    teacherScaledPose.joints[.rightEye]!.isValid = joint.isValid
-                } else {
-                    
-                }
-                //right
-                if let joint =  teacherPose.joints[.rightEar] {
-                    teacherScaledPose.joints[.rightEar]!.position.x = joint.position.x
-                    teacherScaledPose.joints[.rightEar]!.position.y = joint.position.y
-                    teacherScaledPose.joints[.rightEar]!.confidence = joint.confidence
-                    teacherScaledPose.joints[.rightEar]!.isValid = joint.isValid
-                } else {
-                    
-                }
-                if let joint =  teacherPose.joints[.rightShoulder] {
-                    teacherScaledPose.joints[.rightShoulder]!.position.x = joint.position.x
-                    teacherScaledPose.joints[.rightShoulder]!.position.y = joint.position.y
-                    teacherScaledPose.joints[.rightShoulder]!.confidence = joint.confidence
-                    teacherScaledPose.joints[.rightShoulder]!.isValid = joint.isValid
-                } else {
-                    
-                }
-                if let joint =  teacherPose.joints[.rightElbow] {
-                    teacherScaledPose.joints[.rightElbow]!.position.x = joint.position.x
-                    teacherScaledPose.joints[.rightElbow]!.position.y = joint.position.y
-                    teacherScaledPose.joints[.rightElbow]!.confidence = joint.confidence
-                    teacherScaledPose.joints[.rightElbow]!.isValid = joint.isValid
-                } else {
-                    
-                }
-                if let joint =  teacherPose.joints[.rightWrist] {
-                    teacherScaledPose.joints[.rightWrist]!.position.x = joint.position.x
-                    teacherScaledPose.joints[.rightWrist]!.position.y = joint.position.y
-                    teacherScaledPose.joints[.rightWrist]!.confidence = joint.confidence
-                    teacherScaledPose.joints[.rightWrist]!.isValid = joint.isValid
-                } else {
-                    
-                }
-                if let joint =  teacherPose.joints[.rightHip] {
-                    teacherScaledPose.joints[.rightHip]!.position.x = joint.position.x
-                    teacherScaledPose.joints[.rightHip]!.position.y = joint.position.y
-                    teacherScaledPose.joints[.rightHip]!.confidence = joint.confidence
-                    teacherScaledPose.joints[.rightHip]!.isValid = joint.isValid
-                } else {
-                    
-                }
-                if let joint =  teacherPose.joints[.rightKnee] {
-                    teacherScaledPose.joints[.rightKnee]!.position.x = joint.position.x
-                    teacherScaledPose.joints[.rightKnee]!.position.y = joint.position.y
-                    teacherScaledPose.joints[.rightKnee]!.confidence = joint.confidence
-                    teacherScaledPose.joints[.rightKnee]!.isValid = joint.isValid
-                } else {
-                    
-                }
-                if let joint =  teacherPose.joints[.rightAnkle] {
-                    teacherScaledPose.joints[.rightAnkle]!.position.x = joint.position.x + 50
-                    teacherScaledPose.joints[.rightAnkle]!.position.y = joint.position.y + 50
-                    teacherScaledPose.joints[.rightAnkle]!.confidence = joint.confidence
-                    teacherScaledPose.joints[.rightAnkle]!.isValid = false
-                } else {
-                    
-                }
+            let scaledPoseHelper = ScaledPoseHelper(teacherPose: teacherPose)
+            var teacherScaledPose = scaledPoseHelper.getScaledPose()
+
                 
                 //ここまでポーズ
                 teacherScaledPose.confidence = teacherPose.confidence
@@ -456,7 +313,7 @@ extension ViewController: PoseNetDelegate {
                 //print(poses)
                 movieScaledPreviewImageView.show(poses: [teacherScaledPose], on: currentFrame)
                 //print([teacherScaledPose])
-            }
+            
             
         }
     }

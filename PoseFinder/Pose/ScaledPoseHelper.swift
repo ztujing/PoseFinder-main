@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ScaledPoseHealper {
+class ScaledPoseHelper {
     var teacherPose = Pose()
     var scaledPose = Pose()
     var teacherCenterOfGravity:CGPoint? = CGPoint()
@@ -183,6 +183,8 @@ class ScaledPoseHealper {
             self.scaledPose.joints[.leftEar]?.confidence = 0.0;
             self.scaledPose.joints[.leftEar]?.isValid =  false;
         }
+
+        scaledPose.confidence = teacherPose.confidence
         
         return scaledPose
     }
