@@ -89,6 +89,10 @@ class ViewController: UIViewController {
     private var playerLayer:AVPlayerLayer!
     private var player:AVPlayer!
     @IBOutlet weak var playerView: PlayerView!
+    
+    //teacherScaledPoseプロパティを追加
+     var teacherPose: Pose = Pose()
+    
 
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -268,7 +272,21 @@ extension ViewController: PoseNetDelegate {
             ? [poseBuilder.pose]
             : poseBuilder.poses
             
-            //            let scaledPose = //TeacherStudentRatio.getInstance().getScaledPoses(pose: poses[0])
+            let studentPose = poses[0]
+            
+            
+            let scaledPoseHelper = ScaledPoseHelper(teacherPose: self.teacherPose,studentPose: studentPose)
+            var teacherScaledPose = scaledPoseHelper.getScaledPose()
+
+                
+                //ここまでポーズ
+            teacherScaledPose.confidence = self.teacherPose.confidence
+
+                
+                
+             
+                //print(poses)
+            movieScaledPreviewImageView.show(poses: [teacherScaledPose], on: currentFrame)
             
             //座標データ？
             videoPreviewImageView.show(poses: poses, on: currentFrame)
@@ -297,22 +315,11 @@ extension ViewController: PoseNetDelegate {
             
             //ここに入れる
             //先生のポーズ
-            let teacherPose = poses[0]
+            self.teacherPose = poses[0]
             
-            let scaledPoseHelper = ScaledPoseHelper(teacherPose: teacherPose)
-            var teacherScaledPose = scaledPoseHelper.getScaledPose()
+            //座標データ？
+//            moviePreviewImageView.show(poses: poses, on: currentFrame)
 
-                
-                //ここまでポーズ
-                teacherScaledPose.confidence = teacherPose.confidence
-                
-                
-                
-                //座標データ？
-                moviePreviewImageView.show(poses: poses, on: currentFrame)
-                //print(poses)
-                movieScaledPreviewImageView.show(poses: [teacherScaledPose], on: currentFrame)
-                //print([teacherScaledPose])
             
             
         }
