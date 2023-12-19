@@ -271,10 +271,14 @@ extension ViewController: PoseNetDelegate {
             let poses = algorithm == .single
             ? [poseBuilder.pose]
             : poseBuilder.poses
+            print("student:",poses)
+            
+            if(poses.count==0){
+                return
+            }
             
             let studentPose = poses[0]
-            
-            
+
             let scaledPoseHelper = ScaledPoseHelper(teacherPose: self.teacherPose,studentPose: studentPose)
             var teacherScaledPose = scaledPoseHelper.getScaledPose()
 
@@ -312,7 +316,7 @@ extension ViewController: PoseNetDelegate {
             ? [poseBuilder.pose]
             : poseBuilder.poses
             
-            
+            print("teacher:",poses)
             //ここに入れる
             //先生のポーズ
             self.teacherPose = poses[0]
