@@ -51,7 +51,7 @@ class PoseImageView: UIImageView {
     /// - parameters:
     ///     - poses: An array of detected poses.
     ///     - frame: The image used to detect the poses and used as the background for the returned image.
-    func show(poses: [Pose], on frame: CGImage) {
+    func show(poses: [Pose], on frame: CGImage ,isFrameDraw: Bool) {
         
         //Visualize the Detected Poses [検出されたポーズを視覚化する]
         //For each detected pose, the sample app draws a wireframe over the input image, connecting the lines between the joints and then drawing circles for the joints themselves. [サンプルアプリは、検出されたポーズごとに、入力画像上にワイヤーフレームを描画し、関節間の線を接続してから、関節自体の円を描画します。]
@@ -67,7 +67,9 @@ class PoseImageView: UIImageView {
 
         let dstImage = renderer.image { rendererContext in
             // Draw the current frame as the background for the new image.
-            draw(image: frame, in: rendererContext.cgContext)
+            if isFrameDraw {
+                draw(image: frame, in: rendererContext.cgContext)
+            }
 
             for pose in poses {
                 // Draw the segment lines.

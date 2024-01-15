@@ -79,7 +79,7 @@ class ViewController: UIViewController {
     private var movieCurrentFrame: CGImage?
     
     /// The algorithm the controller uses to extract poses from the current frame.
-    private var algorithm: Algorithm = .multiple
+    private var algorithm: Algorithm = .single
 
     /// The set of parameters passed to the pose builder when detecting poses.
     private var poseBuilderConfiguration = PoseBuilderConfiguration()
@@ -290,10 +290,10 @@ extension ViewController: PoseNetDelegate {
                 
              
                 //print(poses)
-            movieScaledPreviewImageView.show(poses: [teacherScaledPose], on: currentFrame)
+            movieScaledPreviewImageView.show(poses: [teacherScaledPose], on: currentFrame, isFrameDraw: false)
             
             //座標データ？
-            videoPreviewImageView.show(poses: poses, on: currentFrame)
+            videoPreviewImageView.show(poses: poses, on: currentFrame, isFrameDraw: true)
             
             
         }else{
