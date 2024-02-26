@@ -65,6 +65,7 @@
 		4AE8C3D223AD2D8A005F9953 /* PoseNetOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseNetOutput.swift; sourceTree = "<group>"; };
 		57C02DF057C02B4000000001 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6D1B1CC228CD64900013B0E1 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		6D2AC0E82B8CC218000FE3AB /* movie_teacher.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = movie_teacher.mp4; path = ../../../Desktop/movie_teacher.mp4; sourceTree = "<group>"; };
 		6D820018287A45FD00483910 /* traning.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = traning.mp4; path = "../../iOS14-Resources-master/SwiftUIVideoPlayerCoreImage/SwiftUIVideoPlayerCoreImage/traning.mp4"; sourceTree = "<group>"; };
 		6D820019287A463A00483910 /* traning.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = traning.mp4; sourceTree = "<group>"; };
 		6DD239412A5D93D90007D39A /* ScaledPoseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledPoseHelper.swift; sourceTree = "<group>"; };
@@ -118,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				57C02DF057C02B4000000001 /* README.md */,
+				6D2AC0E82B8CC218000FE3AB /* movie_teacher.mp4 */,
 				6D820019287A463A00483910 /* traning.mp4 */,
 				4A2D23B022BB70E400494C55 /* PoseFinder */,
 				4A2D23AF22BB70E400494C55 /* Products */,

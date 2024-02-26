@@ -49,6 +49,8 @@ class Joint {
     ///
     /// The joint confidence is obtained from the `heatmap` array output by the PoseNet model.
     var confidence: Double
+    
+    var score: Double = 0.0
 
     /// A boolean value that indicates if the joint satisfies the joint threshold defined in the configuration.
     var isValid: Bool

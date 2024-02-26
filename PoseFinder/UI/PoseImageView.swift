@@ -139,6 +139,7 @@ class PoseImageView: UIImageView {
     ///     - cgContext: The rendering context.
     private func draw(circle joint: Joint, in cgContext: CGContext) {
            cgContext.setFillColor(jointColor.cgColor)
+        // TODO joint.scoreの値によってカラーを変える
 
            let rectangle = CGRect(x: joint.position.x - jointRadius, y: joint.position.y - jointRadius,
                                   width: jointRadius * 2, height: jointRadius * 2)

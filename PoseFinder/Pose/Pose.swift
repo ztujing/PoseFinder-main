@@ -68,6 +68,8 @@ struct Pose {
 
     /// The confidence score associated with this pose.
     var confidence: Double = 0.0
+    
+    var score: Double = 0.0
 
     /// Accesses the joint with the specified name.
     subscript(jointName: Joint.Name) -> Joint {

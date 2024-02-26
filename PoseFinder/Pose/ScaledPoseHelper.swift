@@ -44,7 +44,12 @@ class ScaledPoseHelper {
         }
         var tsRatio = sLength/tLength
         
+        // 総合スコア
+        var totalScore = 0.0
+        
         //rightShoulder
+        var scoreTh_rSh = 50.0
+        
         var pos_rSh = self.multiply(ratio.originToRightShoulder, p("rSh"))
         // scaledPoseがStudentPoseになるように比率を掛け算する
         pos_rSh = self.multiply(tsRatio,pos_rSh)
@@ -52,138 +57,307 @@ class ScaledPoseHelper {
         if (pos_rSh != nil) {
             self.scaledPose.joints[.rightShoulder]?.confidence = 1.0
             self.scaledPose.joints[.rightShoulder]?.isValid = true
+            
+            if let tP = self.scaledPose.joints[.rightShoulder]?.position,
+               let sP = self.studentPose.joints[.rightShoulder]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.rightShoulder]?.score = max((scoreTh_rSh-distance)/scoreTh_rSh,0)
+            }
         } else {
             self.scaledPose.joints[.rightShoulder]?.confidence = 0.0
             self.scaledPose.joints[.rightShoulder]?.isValid = false
+            self.scaledPose.joints[.rightShoulder]?.score = 0.0
         }
         
+        totalScore += self.scaledPose.joints[.rightShoulder]?.score ?? 0.0
+        
+        
         //rightElbow
+        var scoreTh_rEl = 50.0
+
         var pos_rEl = self.add(pos_rSh,self.multiply(ratio.rightShoulderToRightElbow, self.sub(p("rEl"),p("rSh"))))
         pos_rEl = self.multiply(tsRatio,pos_rEl)
         self.scaledPose.joints[.rightElbow]?.position = rePos(position: pos_rEl)
         if(pos_rEl != nil) {
             self.scaledPose.joints[.rightElbow]?.confidence = 1.0
             self.scaledPose.joints[.rightElbow]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.rightElbow]?.position,
+               let sP = self.studentPose.joints[.rightElbow]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.rightElbow]?.score = max((scoreTh_rEl-distance)/scoreTh_rEl,0)
+            }
         }else {
             self.scaledPose.joints[.rightElbow]?.confidence = 0.0
             self.scaledPose.joints[.rightElbow]?.isValid =  false
+            self.scaledPose.joints[.rightElbow]?.score = 0.0
+
         }
+        
+        totalScore += self.scaledPose.joints[.rightElbow]?.score ?? 0.0
+        
+        
         //rightWrist
+        var scoreTh_rWr = 50.0
+
         var pos_rWr = self.add(pos_rEl,multiply(ratio.rightElbowToRightWrist, self.sub(p("rWr"),p("rEl"))))
         pos_rWr = self.multiply(tsRatio,pos_rWr)
         self.scaledPose.joints[.rightWrist]?.position = rePos(position: pos_rWr)
         if(pos_rWr != nil) {
             self.scaledPose.joints[.rightWrist]?.confidence = 1.0
             self.scaledPose.joints[.rightWrist]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.rightWrist]?.position,
+               let sP = self.studentPose.joints[.rightWrist]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.rightWrist]?.score = max((scoreTh_rWr-distance)/scoreTh_rWr,0)
+            }
+            
         }else {
             self.scaledPose.joints[.rightWrist]?.confidence = 0.0
             self.scaledPose.joints[.rightWrist]?.isValid =  false
+            self.scaledPose.joints[.rightWrist]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.rightWrist]?.score ?? 0.0
         
         //rightHip
+        var scoreTh_rHi = 50.0
+
         var pos_rHi = self.multiply(ratio.originToRightHip, p("rHi"))
         pos_rHi = self.multiply(tsRatio,pos_rHi)
         self.scaledPose.joints[.rightHip]?.position = rePos(position: pos_rHi)
         if(pos_rHi != nil) {
-            self.scaledPose.joints[.rightHip]?.confidence = 1.0;
-            self.scaledPose.joints[.rightHip]?.isValid =  true;
+            self.scaledPose.joints[.rightHip]?.confidence = 1.0
+            self.scaledPose.joints[.rightHip]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.rightHip]?.position,
+               let sP = self.studentPose.joints[.rightHip]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.rightHip]?.score = max((scoreTh_rHi-distance)/scoreTh_rHi,0)
+            }
+            
         }else {
-            self.scaledPose.joints[.rightHip]?.confidence = 0.0;
-            self.scaledPose.joints[.rightHip]?.isValid =  false;
+            self.scaledPose.joints[.rightHip]?.confidence = 0.0
+            self.scaledPose.joints[.rightHip]?.isValid =  false
+            self.scaledPose.joints[.rightHip]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.rightHip]?.score ?? 0.0
+
         //rightKnee
+        var scoreTh_rKn = 50.0
+        
         var pos_rKn = self.add(pos_rHi,multiply(ratio.rightHipToRightKnee, self.sub(p("rKn"),p("rHi"))))
         pos_rKn = self.multiply(tsRatio,pos_rKn)
         self.scaledPose.joints[.rightKnee]?.position = rePos(position: pos_rKn)
         if(pos_rKn != nil){
-            self.scaledPose.joints[.rightKnee]?.confidence = 1.0;
-            self.scaledPose.joints[.rightKnee]?.isValid =  true;
+            self.scaledPose.joints[.rightKnee]?.confidence = 1.0
+            self.scaledPose.joints[.rightKnee]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.rightKnee]?.position,
+               let sP = self.studentPose.joints[.rightKnee]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.rightKnee]?.score = max((scoreTh_rKn-distance)/scoreTh_rKn,0)
+            }
         }else {
-            self.scaledPose.joints[.rightKnee]?.confidence = 0.0;
-            self.scaledPose.joints[.rightKnee]?.isValid =  false;
+            self.scaledPose.joints[.rightKnee]?.confidence = 0.0
+            self.scaledPose.joints[.rightKnee]?.isValid =  false
+            self.scaledPose.joints[.rightKnee]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.rightKnee]?.score ?? 0.0
+        
         //rightAnkle
+        var scoreTh_rAn = 50.0
+        
         var pos_rAn = self.add(pos_rKn,multiply(ratio.rightKneeToRightAnkle, self.sub(p("rAn"),p("rKn"))))
         pos_rAn = self.multiply(tsRatio,pos_rAn)
         let scaledPos_rAn = rePos(position: pos_rAn)
-        self.scaledPose.joints[.rightAnkle]?.position = scaledPos_rAn;
+        self.scaledPose.joints[.rightAnkle]?.position = scaledPos_rAn
         if(pos_rAn == nil) {
-            self.scaledPose.joints[.rightAnkle]?.confidence = 0.0;
-            self.scaledPose.joints[.rightAnkle]?.isValid =  true;
+            self.scaledPose.joints[.rightAnkle]?.confidence = 0.0
+            self.scaledPose.joints[.rightAnkle]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.rightAnkle]?.position,
+               let sP = self.studentPose.joints[.rightAnkle]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.rightAnkle]?.score = max((scoreTh_rAn-distance)/scoreTh_rAn,0)
+            }
         }else {
-            self.scaledPose.joints[.rightAnkle]?.confidence = 1.0;
-            self.scaledPose.joints[.rightAnkle]?.isValid =  false;
+            self.scaledPose.joints[.rightAnkle]?.confidence = 1.0
+            self.scaledPose.joints[.rightAnkle]?.isValid =  false
+            self.scaledPose.joints[.rightAnkle]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.rightAnkle]?.score ?? 0.0
         
-        
+  
         //left
         
         //leftShoulder
+        var scoreTh_lSh = 50.0
+        
         var pos_lSh = self.multiply(ratio.originToLeftShoulder, p("lSh"))
         pos_lSh = self.multiply(tsRatio,pos_lSh)
         self.scaledPose.joints[.leftShoulder]?.position = rePos(position: pos_lSh)
         if(pos_lSh != nil) {
-            self.scaledPose.joints[.leftShoulder]?.confidence = 1.0;
-            self.scaledPose.joints[.leftShoulder]?.isValid =  true;
+            self.scaledPose.joints[.leftShoulder]?.confidence = 1.0
+            self.scaledPose.joints[.leftShoulder]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.leftShoulder]?.position,
+               let sP = self.studentPose.joints[.leftShoulder]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.leftShoulder]?.score = max((scoreTh_lSh-distance)/scoreTh_lSh,0)
+            }
         }else {
-            self.scaledPose.joints[.leftShoulder]?.confidence = 0.0;
-            self.scaledPose.joints[.leftShoulder]?.isValid =  false;
+            self.scaledPose.joints[.leftShoulder]?.confidence = 0.0
+            self.scaledPose.joints[.leftShoulder]?.isValid =  false
+            self.scaledPose.joints[.leftShoulder]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.leftShoulder]?.score ?? 0.0
+
         //leftElbow
+        var scoreTh_lEl = 50.0
+        
         var pos_lEl = self.add(pos_lSh,multiply(ratio.leftShoulderToLeftElbow, self.sub(p("lEl"),p("lSh"))))
         pos_lEl = self.multiply(tsRatio,pos_lEl)
         self.scaledPose.joints[.leftElbow]?.position = rePos(position: pos_lEl)
         if(pos_lEl != nil) {
-            self.scaledPose.joints[.leftElbow]?.confidence = 1.0;
-            self.scaledPose.joints[.leftElbow]?.isValid =  true;
+            self.scaledPose.joints[.leftElbow]?.confidence = 1.0
+            self.scaledPose.joints[.leftElbow]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.leftElbow]?.position,
+               let sP = self.studentPose.joints[.leftElbow]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.leftElbow]?.score = max((scoreTh_lEl-distance)/scoreTh_lEl,0)
+            }
         }else {
-            self.scaledPose.joints[.leftElbow]?.confidence = 0.0;
-            self.scaledPose.joints[.leftElbow]?.isValid =  false;
+            self.scaledPose.joints[.leftElbow]?.confidence = 0.0
+            self.scaledPose.joints[.leftElbow]?.isValid =  false
+            self.scaledPose.joints[.leftElbow]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.leftElbow]?.score ?? 0.0
+        
         //leftWrist
+        var scoreTh_lWr = 50.0
+        
         var pos_lWr = self.add(pos_lEl,multiply(ratio.leftElbowToLeftWrist, self.sub(p("lWr"),p("lEl"))))
         pos_lWr = self.multiply(tsRatio,pos_lWr)
         self.scaledPose.joints[.leftWrist]?.position = rePos(position: pos_lWr)
         if(pos_lWr != nil) {
-            self.scaledPose.joints[.leftWrist]?.confidence = 1.0;
-            self.scaledPose.joints[.leftWrist]?.isValid =  true;
+            self.scaledPose.joints[.leftWrist]?.confidence = 1.0
+            self.scaledPose.joints[.leftWrist]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.leftWrist]?.position,
+               let sP = self.studentPose.joints[.leftWrist]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.leftWrist]?.score = max((scoreTh_lWr-distance)/scoreTh_lWr,0)
+            }
         }else {
-            self.scaledPose.joints[.leftWrist]?.confidence = 0.0;
-            self.scaledPose.joints[.leftWrist]?.isValid =  false;
+            self.scaledPose.joints[.leftWrist]?.confidence = 0.0
+            self.scaledPose.joints[.leftWrist]?.isValid =  false
+            self.scaledPose.joints[.leftWrist]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.leftWrist]?.score ?? 0.0
+        
         //leftHip
+        var scoreTh_lHi = 50.0
+        
         var pos_lHi = self.multiply(ratio.originToLeftHip, p("lHi"))
         pos_lHi = self.multiply(tsRatio,pos_lHi)
         self.scaledPose.joints[.leftHip]?.position = rePos(position: pos_lHi)
         if(pos_lHi != nil) {
-            self.scaledPose.joints[.leftHip]?.confidence = 1.0;
-            self.scaledPose.joints[.leftHip]?.isValid =  true;
+            self.scaledPose.joints[.leftHip]?.confidence = 1.0
+            self.scaledPose.joints[.leftHip]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.leftHip]?.position,
+               let sP = self.studentPose.joints[.leftHip]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.leftHip]?.score = max((scoreTh_lHi-distance)/scoreTh_lHi,0)
+            }
         }else {
-            self.scaledPose.joints[.leftHip]?.confidence = 0.0;
-            self.scaledPose.joints[.leftHip]?.isValid =  false;
+            self.scaledPose.joints[.leftHip]?.confidence = 0.0
+            self.scaledPose.joints[.leftHip]?.isValid =  false
+            self.scaledPose.joints[.leftHip]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.leftHip]?.score ?? 0.0
+        
         //leftKnee
+        var scoreTh_lKn = 50.0
+        
         var pos_lKn = self.add(pos_lHi,multiply(ratio.leftHipToLeftKnee, self.sub(p("lKn"),p("lHi"))))
         pos_lKn = self.multiply(tsRatio,pos_lKn)
         self.scaledPose.joints[.leftKnee]?.position = rePos(position: pos_lKn)
         if(pos_lKn != nil){
-            self.scaledPose.joints[.leftKnee]?.confidence = 1.0;
-            self.scaledPose.joints[.leftKnee]?.isValid =  true;
+            self.scaledPose.joints[.leftKnee]?.confidence = 1.0
+            self.scaledPose.joints[.leftKnee]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.leftKnee]?.position,
+               let sP = self.studentPose.joints[.leftKnee]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.leftKnee]?.score = max((scoreTh_lKn-distance)/scoreTh_lKn,0)
+            }
         }else {
-            self.scaledPose.joints[.leftKnee]?.confidence = 0.0;
-            self.scaledPose.joints[.leftKnee]?.isValid =  false;
+            self.scaledPose.joints[.leftKnee]?.confidence = 0.0
+            self.scaledPose.joints[.leftKnee]?.isValid =  false
+            self.scaledPose.joints[.leftKnee]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.leftKnee]?.score ?? 0.0
+        
+        
         //leftAnkle
+        var scoreTh_lAn = 50.0
+        
         var pos_lAn = self.add(pos_lKn,multiply(ratio.leftKneeToLeftAnkle, self.sub(p("lAn"),p("lKn"))))
         pos_lAn = self.multiply(tsRatio,pos_lAn)
         self.scaledPose.joints[.leftAnkle]?.position = rePos(position: pos_lAn)
         if(pos_lAn != nil) {
-            self.scaledPose.joints[.leftAnkle]?.confidence = 1.0;
-            self.scaledPose.joints[.leftAnkle]?.isValid =  true;
+            self.scaledPose.joints[.leftAnkle]?.confidence = 1.0
+            self.scaledPose.joints[.leftAnkle]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.leftAnkle]?.position,
+               let sP = self.studentPose.joints[.leftAnkle]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.leftAnkle]?.score = max((scoreTh_lAn-distance)/scoreTh_lAn,0)
+            }
         }else {
-            self.scaledPose.joints[.leftAnkle]?.confidence = 0.0;
-            self.scaledPose.joints[.leftAnkle]?.isValid =  false;
+            self.scaledPose.joints[.leftAnkle]?.confidence = 0.0
+            self.scaledPose.joints[.leftAnkle]?.isValid =  false
+            self.scaledPose.joints[.leftAnkle]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.leftAnkle]?.score ?? 0.0
+        
         
         //face
         
@@ -191,31 +365,63 @@ class ScaledPoseHelper {
         var midpoint = multiply(0.5,self.add(p("rSh"),p("lSh")))
         var pos_midpoint = multiply(0.5,self.add(pos_rSh,pos_lSh))
         
+        
         //rightEar
+        var scoreTh_rEa = 50.0
+        
         var pos_rEa = self.add(pos_midpoint,multiply(ratio.midpointOfShouldersToRightEar, self.sub(p("rEa"),midpoint)))
         pos_rEa = self.multiply(tsRatio,pos_rEa)
         self.scaledPose.joints[.rightEar]?.position = rePos(position: pos_rEa)
         if(pos_rEa != nil) {
-            self.scaledPose.joints[.rightEar]?.confidence = 1.0;
-            self.scaledPose.joints[.rightEar]?.isValid =  true;
+            self.scaledPose.joints[.rightEar]?.confidence = 1.0
+            self.scaledPose.joints[.rightEar]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.rightEar]?.position,
+               let sP = self.studentPose.joints[.rightEar]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.rightEar]?.score = max((scoreTh_rEa-distance)/scoreTh_rEa,0)
+            }
         }else {
-            self.scaledPose.joints[.rightEar]?.confidence = 0.0;
-            self.scaledPose.joints[.rightEar]?.isValid =  false;
+            self.scaledPose.joints[.rightEar]?.confidence = 0.0
+            self.scaledPose.joints[.rightEar]?.isValid =  false
+            self.scaledPose.joints[.rightEar]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.rightEar]?.score ?? 0.0
+        
         
         //leftEar
+        var scoreTh_lEa = 50.0
+        
         var pos_lEa = self.add(pos_midpoint,multiply(ratio.midpointOfShouldersToLeftEar, self.sub(p("lEa"),midpoint)))
         pos_lEa = self.multiply(tsRatio,pos_lEa)
         self.scaledPose.joints[.leftEar]?.position = rePos(position: pos_lEa)
         if(pos_lEa != nil) {
-            self.scaledPose.joints[.leftEar]?.confidence = 1.0;
-            self.scaledPose.joints[.leftEar]?.isValid =  true;
+            self.scaledPose.joints[.leftEar]?.confidence = 1.0
+            self.scaledPose.joints[.leftEar]?.isValid =  true
+            
+            if let tP = self.scaledPose.joints[.leftEar]?.position,
+               let sP = self.studentPose.joints[.leftEar]?.position {
+                
+                var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
+                print("distance:",distance)
+                self.scaledPose.joints[.leftEar]?.score = max((scoreTh_lEa-distance)/scoreTh_lEa,0)
+            }
         }else {
-            self.scaledPose.joints[.leftEar]?.confidence = 0.0;
-            self.scaledPose.joints[.leftEar]?.isValid =  false;
+            self.scaledPose.joints[.leftEar]?.confidence = 0.0
+            self.scaledPose.joints[.leftEar]?.isValid =  false
+            self.scaledPose.joints[.leftEar]?.score = 0.0
+
         }
+        totalScore += self.scaledPose.joints[.leftEar]?.score ?? 0.0
+        
         
         scaledPose.confidence = teacherPose.confidence
+        
+        totalScore /= 14
+        print("totalScore",totalScore)
         
         // 重心を計算して引き算
         

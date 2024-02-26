@@ -21,39 +21,41 @@ final class TeacherStudentRatio {
   static let shared = TeacherStudentRatio ()
 
   // ここに変数を列挙するはじめは0を入れておいてよい。
-    var originToRightShoulder = 0.0;
-    var rightShoulderToRightElbow = 0.0;
-    var rightElbowToRightWrist = 0.0;
-    var originToRightHip = 0.0;
-    var rightHipToRightKnee = 0.0;
-    var rightKneeToRightAnkle = 0.0;
-    var midpointOfShouldersToRightEar = 0.0;
-    var originToLeftShoulder = 0.0;
-    var leftShoulderToLeftElbow = 0.0;
-    var leftElbowToLeftWrist = 0.0;
-    var originToLeftHip = 0.0;
-    var leftHipToLeftKnee = 0.0;
-    var leftKneeToLeftAnkle = 0.0;
-    var midpointOfShouldersToLeftEar = 0.0;
+    var originToRightShoulder = 1.0;
+    var rightShoulderToRightElbow = 1.0;
+    var rightElbowToRightWrist = 1.0;
+    var originToRightHip = 1.0;
+    var rightHipToRightKnee = 1.0;
+    var rightKneeToRightAnkle = 1.0;
+    var midpointOfShouldersToRightEar = 1.0;
+    var originToLeftShoulder = 1.0;
+    var leftShoulderToLeftElbow = 1.0;
+    var leftElbowToLeftWrist = 1.0;
+    var originToLeftHip = 1.0;
+    var leftHipToLeftKnee = 1.0;
+    var leftKneeToLeftAnkle = 1.0;
+    var midpointOfShouldersToLeftEar = 1.0;
     
 
   // イニシャライズ
   private init() {
      // 今回は定数を代入する。いずれは、ローカルのDBかファイルに保存しておいて読み込むようにする。
-      self.originToRightShoulder = 0.9042862676;
-      self.rightShoulderToRightElbow = 1.245541657;
-      self.rightElbowToRightWrist = 0.8226015546;
-      self.originToRightHip = 0.9789301811;
-      self.rightHipToRightKnee = 1.253915664;
-      self.rightKneeToRightAnkle = 1.247329766;
-      self.midpointOfShouldersToRightEar = 0.8929083536;
-      self.originToLeftShoulder = 0.9518434667;
-      self.leftShoulderToLeftElbow = 1.094948532;
-      self.leftElbowToLeftWrist = 1.165524656;
-      self.originToLeftHip = 0.9649565827;
-      self.leftHipToLeftKnee = 1.168294556;
-      self.leftKneeToLeftAnkle = 1.185906149;
-      self.midpointOfShouldersToLeftEar = 0.8855039207;
+//      self.originToRightShoulder = 0.9042862676;
+//      self.rightShoulderToRightElbow = 1.245541657;
+//      self.rightElbowToRightWrist = 0.8226015546;
+//      self.originToRightHip = 0.9789301811;
+//      self.rightHipToRightKnee = 1.253915664;
+//      self.rightKneeToRightAnkle = 1.247329766;
+//      self.midpointOfShouldersToRightEar = 0.8929083536;
+//      self.originToLeftShoulder = 0.9518434667;
+//      self.leftShoulderToLeftElbow = 1.094948532;
+//      self.leftElbowToLeftWrist = 1.165524656;
+//      self.originToLeftHip = 0.9649565827;
+//      self.leftHipToLeftKnee = 1.168294556;
+//      self.leftKneeToLeftAnkle = 1.185906149;
+//      self.midpointOfShouldersToLeftEar = 0.8855039207;
+      
+
 
   }
     public static func getInstance() -> TeacherStudentRatio {
