@@ -324,7 +324,7 @@ extension ViewController: PoseNetDelegate {
             self.teacherPose = poses[0]
             
             //座標データ？
-//            moviePreviewImageView.show(poses: poses, on: currentFrame)
+//            moviePreviewImageView.show(poses: poses, on: currentFrame, isFrameDraw: true)
 
             
             

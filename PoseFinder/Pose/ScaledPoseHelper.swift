@@ -33,7 +33,7 @@ class ScaledPoseHelper {
     
     func getScaledPose () -> Pose {
         
-        guard let tRSh = rawP("rSh"),let sRSh = rawSP("rSh") else {
+        guard let tRSh = p("rSh"),let sRSh = sp("rSh") else {
             return Pose()
         }
         // 比率
@@ -43,6 +43,7 @@ class ScaledPoseHelper {
             return Pose()
         }
         var tsRatio = sLength/tLength
+        print("tsRatio:",tsRatio)
         
         // 総合スコア
         var totalScore = 0.0
@@ -183,9 +184,8 @@ class ScaledPoseHelper {
         
         var pos_rAn = self.add(pos_rKn,multiply(ratio.rightKneeToRightAnkle, self.sub(p("rAn"),p("rKn"))))
         pos_rAn = self.multiply(tsRatio,pos_rAn)
-        let scaledPos_rAn = rePos(position: pos_rAn)
-        self.scaledPose.joints[.rightAnkle]?.position = scaledPos_rAn
-        if(pos_rAn == nil) {
+        self.scaledPose.joints[.rightAnkle]?.position = rePos(position: pos_rAn)
+        if(pos_rAn != nil) {
             self.scaledPose.joints[.rightAnkle]?.confidence = 0.0
             self.scaledPose.joints[.rightAnkle]?.isValid =  true
             
@@ -369,8 +369,8 @@ class ScaledPoseHelper {
         //rightEar
         var scoreTh_rEa = 50.0
         
-        var pos_rEa = self.add(pos_midpoint,multiply(ratio.midpointOfShouldersToRightEar, self.sub(p("rEa"),midpoint)))
-        pos_rEa = self.multiply(tsRatio,pos_rEa)
+        var pos_rEa = self.multiply(tsRatio,multiply(ratio.midpointOfShouldersToRightEar, self.sub(p("rEa"),midpoint)))
+        pos_rEa = self.add(pos_midpoint,pos_rEa)
         self.scaledPose.joints[.rightEar]?.position = rePos(position: pos_rEa)
         if(pos_rEa != nil) {
             self.scaledPose.joints[.rightEar]?.confidence = 1.0
@@ -395,8 +395,8 @@ class ScaledPoseHelper {
         //leftEar
         var scoreTh_lEa = 50.0
         
-        var pos_lEa = self.add(pos_midpoint,multiply(ratio.midpointOfShouldersToLeftEar, self.sub(p("lEa"),midpoint)))
-        pos_lEa = self.multiply(tsRatio,pos_lEa)
+        var pos_lEa = self.multiply(tsRatio,multiply(ratio.midpointOfShouldersToLeftEar, self.sub(p("lEa"),midpoint)))
+        pos_lEa = self.add(pos_midpoint,pos_lEa)
         self.scaledPose.joints[.leftEar]?.position = rePos(position: pos_lEa)
         if(pos_lEa != nil) {
             self.scaledPose.joints[.leftEar]?.confidence = 1.0
@@ -457,6 +457,11 @@ class ScaledPoseHelper {
     func p(_ name:String) -> CGPoint?
     {
         return self.sub(self.rawP(name), self.teacherCenterOfGravity);
+    }
+    //sp
+    func sp(_ name:String) -> CGPoint?
+    {
+        return self.sub(self.rawSP(name), self.studentCenterOfGravity);
     }
     //rawP
     func rawSP(_ name: String) -> CGPoint?
