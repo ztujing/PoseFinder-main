@@ -42,7 +42,7 @@ class ScaledPoseHelper {
         if (tLength == 0 ){
             return Pose()
         }
-        var tsRatio = sLength/tLength
+        var tsRatio = 1.5 * sLength/tLength
         print("tsRatio:",tsRatio)
         
         // 総合スコア
@@ -78,8 +78,8 @@ class ScaledPoseHelper {
         //rightElbow
         var scoreTh_rEl = 50.0
 
-        var pos_rEl = self.add(pos_rSh,self.multiply(ratio.rightShoulderToRightElbow, self.sub(p("rEl"),p("rSh"))))
-        pos_rEl = self.multiply(tsRatio,pos_rEl)
+        var pos_rEl = self.multiply(tsRatio,self.multiply(ratio.rightShoulderToRightElbow, self.sub(p("rEl"),p("rSh"))))
+        pos_rEl = self.add(pos_rSh,pos_rEl)
         self.scaledPose.joints[.rightElbow]?.position = rePos(position: pos_rEl)
         if(pos_rEl != nil) {
             self.scaledPose.joints[.rightElbow]?.confidence = 1.0
@@ -105,8 +105,8 @@ class ScaledPoseHelper {
         //rightWrist
         var scoreTh_rWr = 50.0
 
-        var pos_rWr = self.add(pos_rEl,multiply(ratio.rightElbowToRightWrist, self.sub(p("rWr"),p("rEl"))))
-        pos_rWr = self.multiply(tsRatio,pos_rWr)
+        var pos_rWr = self.multiply(tsRatio,multiply(ratio.rightElbowToRightWrist, self.sub(p("rWr"),p("rEl"))))
+        pos_rWr = self.add(pos_rEl,pos_rWr)
         self.scaledPose.joints[.rightWrist]?.position = rePos(position: pos_rWr)
         if(pos_rWr != nil) {
             self.scaledPose.joints[.rightWrist]?.confidence = 1.0
@@ -157,8 +157,8 @@ class ScaledPoseHelper {
         //rightKnee
         var scoreTh_rKn = 50.0
         
-        var pos_rKn = self.add(pos_rHi,multiply(ratio.rightHipToRightKnee, self.sub(p("rKn"),p("rHi"))))
-        pos_rKn = self.multiply(tsRatio,pos_rKn)
+        var pos_rKn = self.multiply(tsRatio,multiply(ratio.rightHipToRightKnee, self.sub(p("rKn"),p("rHi"))))
+        pos_rKn = self.add(pos_rHi,pos_rKn)
         self.scaledPose.joints[.rightKnee]?.position = rePos(position: pos_rKn)
         if(pos_rKn != nil){
             self.scaledPose.joints[.rightKnee]?.confidence = 1.0
@@ -182,8 +182,8 @@ class ScaledPoseHelper {
         //rightAnkle
         var scoreTh_rAn = 50.0
         
-        var pos_rAn = self.add(pos_rKn,multiply(ratio.rightKneeToRightAnkle, self.sub(p("rAn"),p("rKn"))))
-        pos_rAn = self.multiply(tsRatio,pos_rAn)
+        var pos_rAn = self.multiply(tsRatio,multiply(ratio.rightKneeToRightAnkle, self.sub(p("rAn"),p("rKn"))))
+        pos_rAn = self.add(pos_rKn,pos_rAn)
         self.scaledPose.joints[.rightAnkle]?.position = rePos(position: pos_rAn)
         if(pos_rAn != nil) {
             self.scaledPose.joints[.rightAnkle]?.confidence = 0.0
@@ -235,8 +235,8 @@ class ScaledPoseHelper {
         //leftElbow
         var scoreTh_lEl = 50.0
         
-        var pos_lEl = self.add(pos_lSh,multiply(ratio.leftShoulderToLeftElbow, self.sub(p("lEl"),p("lSh"))))
-        pos_lEl = self.multiply(tsRatio,pos_lEl)
+        var pos_lEl = self.multiply(tsRatio,multiply(ratio.leftShoulderToLeftElbow, self.sub(p("lEl"),p("lSh"))))
+        pos_lEl = self.add(pos_lSh,pos_lEl)
         self.scaledPose.joints[.leftElbow]?.position = rePos(position: pos_lEl)
         if(pos_lEl != nil) {
             self.scaledPose.joints[.leftElbow]?.confidence = 1.0
@@ -260,8 +260,8 @@ class ScaledPoseHelper {
         //leftWrist
         var scoreTh_lWr = 50.0
         
-        var pos_lWr = self.add(pos_lEl,multiply(ratio.leftElbowToLeftWrist, self.sub(p("lWr"),p("lEl"))))
-        pos_lWr = self.multiply(tsRatio,pos_lWr)
+        var pos_lWr = self.multiply(tsRatio,multiply(ratio.leftElbowToLeftWrist, self.sub(p("lWr"),p("lEl"))))
+        pos_lWr = self.add(pos_lEl,pos_lWr)
         self.scaledPose.joints[.leftWrist]?.position = rePos(position: pos_lWr)
         if(pos_lWr != nil) {
             self.scaledPose.joints[.leftWrist]?.confidence = 1.0
@@ -310,8 +310,8 @@ class ScaledPoseHelper {
         //leftKnee
         var scoreTh_lKn = 50.0
         
-        var pos_lKn = self.add(pos_lHi,multiply(ratio.leftHipToLeftKnee, self.sub(p("lKn"),p("lHi"))))
-        pos_lKn = self.multiply(tsRatio,pos_lKn)
+        var pos_lKn = self.multiply(tsRatio,multiply(ratio.leftHipToLeftKnee, self.sub(p("lKn"),p("lHi"))))
+        pos_lKn = self.add(pos_lHi,pos_lKn)
         self.scaledPose.joints[.leftKnee]?.position = rePos(position: pos_lKn)
         if(pos_lKn != nil){
             self.scaledPose.joints[.leftKnee]?.confidence = 1.0
@@ -336,8 +336,8 @@ class ScaledPoseHelper {
         //leftAnkle
         var scoreTh_lAn = 50.0
         
-        var pos_lAn = self.add(pos_lKn,multiply(ratio.leftKneeToLeftAnkle, self.sub(p("lAn"),p("lKn"))))
-        pos_lAn = self.multiply(tsRatio,pos_lAn)
+        var pos_lAn = self.multiply(tsRatio,multiply(ratio.leftKneeToLeftAnkle, self.sub(p("lAn"),p("lKn"))))
+        pos_lAn = self.add(pos_lKn,pos_lAn)
         self.scaledPose.joints[.leftAnkle]?.position = rePos(position: pos_lAn)
         if(pos_lAn != nil) {
             self.scaledPose.joints[.leftAnkle]?.confidence = 1.0
