@@ -273,7 +273,7 @@ extension ViewController: PoseNetDelegate {
             let poses = algorithm == .single
             ? [poseBuilder.pose]
             : poseBuilder.poses
-            print("student:",poses)
+//            print("student:",poses)
             
             if(poses.count==0){
                 return
@@ -318,13 +318,13 @@ extension ViewController: PoseNetDelegate {
             ? [poseBuilder.pose]
             : poseBuilder.poses
             
-            print("teacher:",poses)
+//            print("teacher:",poses)
             //ここに入れる
             //先生のポーズ
             self.teacherPose = poses[0]
             
             //座標データ？
-//            moviePreviewImageView.show(poses: poses, on: currentFrame, isFrameDraw: true)
+            moviePreviewImageView.show(poses: poses, on: currentFrame, isFrameDraw: true)
 
             
             
