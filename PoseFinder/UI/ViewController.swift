@@ -116,6 +116,15 @@ class ViewController: UIViewController {
       setupAndBeginCapturingVideoFrames()
       setupAndBeginCapturingMovieFrames()
     }
+    
+    //追加　Viewのサイズを揃える
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        videoPreviewImageView.frame = view.bounds
+        movieScaledPreviewImageView.frame = view.bounds
+    }
+    
     private func setupAndBeginCapturingMovieFrames() {
       let asset = AVAsset(url: Bundle.main.url(forResource: "traning", withExtension: "mp4")!)
       let composition = AVVideoComposition(asset: asset, applyingCIFiltersWithHandler: { request in

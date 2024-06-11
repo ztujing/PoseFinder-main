@@ -30,9 +30,11 @@
 		4AE8C3CF23AD2A74005F9953 /* CGImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8C3CE23AD2A74005F9953 /* CGImage+Extension.swift */; };
 		4AE8C3D123AD2D3B005F9953 /* PoseNetInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8C3D023AD2D3B005F9953 /* PoseNetInput.swift */; };
 		4AE8C3D323AD2D8A005F9953 /* PoseNetOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8C3D223AD2D8A005F9953 /* PoseNetOutput.swift */; };
+		6D12FCF22C04BAD7007F7CD3 /* PoseNetMobileNet100S8FP16.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6D12FCF12C04BAD7007F7CD3 /* PoseNetMobileNet100S8FP16.mlmodel */; };
 		6D1B1CC328CD64900013B0E1 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B1CC228CD64900013B0E1 /* PlayerView.swift */; };
 		6D2BDD8928968C0700AE55E9 /* traning.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6D820019287A463A00483910 /* traning.mp4 */; };
 		6DD239422A5D93D90007D39A /* ScaledPoseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD239412A5D93D90007D39A /* ScaledPoseHelper.swift */; };
+		6DD7A3162BF37F1A00079E4A /* bg_blue.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DD7A3152BF37F1A00079E4A /* bg_blue.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,10 +66,12 @@
 		4AE8C3D023AD2D3B005F9953 /* PoseNetInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseNetInput.swift; sourceTree = "<group>"; };
 		4AE8C3D223AD2D8A005F9953 /* PoseNetOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseNetOutput.swift; sourceTree = "<group>"; };
 		57C02DF057C02B4000000001 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6D12FCF12C04BAD7007F7CD3 /* PoseNetMobileNet100S8FP16.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PoseNetMobileNet100S8FP16.mlmodel; sourceTree = "<group>"; };
 		6D1B1CC228CD64900013B0E1 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		6D820018287A45FD00483910 /* traning.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = traning.mp4; path = "../../iOS14-Resources-master/SwiftUIVideoPlayerCoreImage/SwiftUIVideoPlayerCoreImage/traning.mp4"; sourceTree = "<group>"; };
 		6D820019287A463A00483910 /* traning.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = traning.mp4; sourceTree = "<group>"; };
 		6DD239412A5D93D90007D39A /* ScaledPoseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledPoseHelper.swift; sourceTree = "<group>"; };
+		6DD7A3152BF37F1A00079E4A /* bg_blue.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bg_blue.mp4; sourceTree = "<group>"; };
 		BEE6CF152B804A05BF905D20 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +123,7 @@
 			children = (
 				57C02DF057C02B4000000001 /* README.md */,
 				6D820019287A463A00483910 /* traning.mp4 */,
+				6DD7A3152BF37F1A00079E4A /* bg_blue.mp4 */,
 				4A2D23B022BB70E400494C55 /* PoseFinder */,
 				4A2D23AF22BB70E400494C55 /* Products */,
 				1E2F76EA3781C8213469E3A0 /* Configuration */,
@@ -193,6 +198,7 @@
 		6594E51B23454C4100D3C44D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6D12FCF12C04BAD7007F7CD3 /* PoseNetMobileNet100S8FP16.mlmodel */,
 				0D4BB83E249769C800076D64 /* PoseNetMobileNet075S16FP16.mlmodel */,
 				4AE8C3D023AD2D3B005F9953 /* PoseNetInput.swift */,
 				4AE8C3D223AD2D8A005F9953 /* PoseNetOutput.swift */,
@@ -261,6 +267,7 @@
 			files = (
 				6D2BDD8928968C0700AE55E9 /* traning.mp4 in Resources */,
 				4A2D23BE22BB70E500494C55 /* LaunchScreen.storyboard in Resources */,
+				6DD7A3162BF37F1A00079E4A /* bg_blue.mp4 in Resources */,
 				4A2D23BB22BB70E500494C55 /* Assets.xcassets in Resources */,
 				4A2D23B922BB70E400494C55 /* Main.storyboard in Resources */,
 			);
@@ -291,6 +298,7 @@
 				4AE8C3D323AD2D8A005F9953 /* PoseNetOutput.swift in Sources */,
 				0DCEF2CE241676C000ECEC99 /* PoseBuilderConfiguration.swift in Sources */,
 				4ADD52F822BBCF580008FAAC /* Joint.swift in Sources */,
+				6D12FCF22C04BAD7007F7CD3 /* PoseNetMobileNet100S8FP16.mlmodel in Sources */,
 				4ADE4C8C2346C07300FFD895 /* AVCaptureVideoOrientation+Extension.swift in Sources */,
 				4AE8C3CB23ACDF1C005F9953 /* PoseImageView.swift in Sources */,
 				0D4BB83F249769C800076D64 /* PoseNetMobileNet075S16FP16.mlmodel in Sources */,

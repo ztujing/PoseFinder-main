@@ -20,10 +20,10 @@ class ScaledPoseHelper {
         self.teacherPose = teacherPose;
         self.studentPose = studentPose;
         //先生のグラビティを計算
-        self.teacherCenterOfGravity = self.multiply(0.25, add(add(rawP("rSh"), rawP("lSh")),add(rawP("rHi"), rawP("lHi"))));
+        self.teacherCenterOfGravity = rawP("lSh")/*self.multiply(0.25, add(add(rawP("rSh"), rawP("lSh")),add(rawP("rHi"), rawP("lHi"))));*/
         print("teacherCenterOfGravity:",teacherCenterOfGravity)
         //生徒のグラビティを計算
-        self.studentCenterOfGravity = self.multiply(0.25, add(add(rawSP("rSh"), rawSP("lSh")),add(rawSP("rHi"), rawSP("lHi"))));
+        self.studentCenterOfGravity = rawSP("lSh")/*self.multiply(0.25, add(add(rawSP("rSh"), rawSP("lSh")),add(rawSP("rHi"), rawSP("lHi"))));*/
         print("studentCenterOfGravity:",studentCenterOfGravity)
     }
     func rePos (position:CGPoint?) -> CGPoint {
@@ -234,6 +234,7 @@ class ScaledPoseHelper {
         var pos_lSh = self.multiply(ratio.originToLeftShoulder, p("lSh"))
         pos_lSh = self.multiply(tsRatio,pos_lSh)
         self.scaledPose.joints[.leftShoulder]?.position = rePos(position: pos_lSh)
+        print("***************lSh*****",p("lSh"),pos_lSh,rePos(position: pos_lSh),rawSP("lSh"))
         if(pos_lSh != nil) {
             self.scaledPose.joints[.leftShoulder]?.confidence = 1.0
             self.scaledPose.joints[.leftShoulder]?.isValid =  true
