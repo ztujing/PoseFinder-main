@@ -51,7 +51,7 @@ class PoseImageView: UIImageView {
     /// - parameters:
     ///     - poses: An array of detected poses.
     ///     - frame: The image used to detect the poses and used as the background for the returned image.
-    func show(poses: [Pose], on frame: CGImage ,isFrameDraw: Bool) {
+    func show(scaledPose: Pose, studentPose: Pose, on frame: CGImage ,isFrameDraw: Bool) {
         
         //Visualize the Detected Poses [検出されたポーズを視覚化する]
         //For each detected pose, the sample app draws a wireframe over the input image, connecting the lines between the joints and then drawing circles for the joints themselves. [サンプルアプリは、検出されたポーズごとに、入力画像上にワイヤーフレームを描画し、関節間の線を接続してから、関節自体の円を描画します。]
@@ -71,26 +71,40 @@ class PoseImageView: UIImageView {
                 draw(image: frame, in: rendererContext.cgContext)
             }
 
-            for pose in poses {
-                // Draw the segment lines.
-                for segment in PoseImageView.jointSegments {
-                    let jointA = pose[segment.jointA]
-                    let jointB = pose[segment.jointB]
-                    //
-                    guard jointA.isValid, jointB.isValid else {
-                        continue
-                    }
-                    //print(jointA,jointB)
-                    
-                    drawLine(from: jointA,
-                             to: jointB,
-                             in: rendererContext.cgContext)
+            // scaledPose の処理
+            for segment in PoseImageView.jointSegments {
+                let jointA = scaledPose[segment.jointA]
+                let jointB = scaledPose[segment.jointB]
+                
+                guard jointA.isValid, jointB.isValid else {
+                    continue
                 }
+                
+                drawLine(from: jointA,
+                         to: jointB,
+                         in: rendererContext.cgContext)
+            }
 
-                // Draw the joints as circles above the segment lines.
-                for joint in pose.joints.values.filter({ $0.isValid }) {
-                    draw(circle: joint, in: rendererContext.cgContext)
+            for joint in scaledPose.joints.values.filter({ $0.isValid }) {
+                draw(circle: joint, score: joint.score, in: rendererContext.cgContext)
+            }
+
+            // studentPose の処理
+            for segment in PoseImageView.jointSegments {
+                let jointA = studentPose[segment.jointA]
+                let jointB = studentPose[segment.jointB]
+                
+                guard jointA.isValid, jointB.isValid else {
+                    continue
                 }
+                
+                drawLine(from: jointA,
+                         to: jointB,
+                         in: rendererContext.cgContext)
+            }
+
+            for joint in studentPose.joints.values.filter({ $0.isValid }) {
+                draw(circle: joint, score: joint.score, in: rendererContext.cgContext)
             }
         }
 
@@ -137,13 +151,21 @@ class PoseImageView: UIImageView {
     /// - parameters:
     ///     - circle: A valid joint whose position is used as the circle's center.
     ///     - cgContext: The rendering context.
-    private func draw(circle joint: Joint, in cgContext: CGContext) {
-           cgContext.setFillColor(jointColor.cgColor)
-        // TODO joint.scoreの値によってカラーを変える
+    private func draw(circle joint: Joint, score: Double, in cgContext: CGContext) {
+        // スコアに基づいて色を決定
+        let color = colorBasedOnScore(score)
+        cgContext.setFillColor(color.cgColor)
 
-           let rectangle = CGRect(x: joint.position.x - jointRadius, y: joint.position.y - jointRadius,
-                                  width: jointRadius * 2, height: jointRadius * 2)
+        let rectangle = CGRect(x: joint.position.x - jointRadius, y: joint.position.y - jointRadius,
+                               width: jointRadius * 2, height: jointRadius * 2)
         cgContext.addEllipse(in: rectangle)
         cgContext.drawPath(using: .fill)
+    }
+
+    // スコアに基づいて色を決定する補助関数
+    private func colorBasedOnScore(_ score: Double) -> UIColor {
+        // スコアが0から1の範囲であると仮定
+        // スコアが低いほど赤に近く、高いほど緑に近くなる
+        return UIColor(red: CGFloat(1 - score), green: CGFloat(score), blue: 0, alpha: 1)
     }
 }

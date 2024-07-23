@@ -71,6 +71,7 @@ class ViewController: UIViewController {
     @IBOutlet private var moviePreviewImageView: PoseImageView!
     @IBOutlet private var movieScaledPreviewImageView: PoseImageView!
     
+    @IBOutlet weak var ScoreLabel: UILabel!
     private let videoCapture = VideoCapture()
 
     private var videoPoseNet: PoseNet!
@@ -301,10 +302,13 @@ extension ViewController: PoseNetDelegate {
                 
              
                 //print(poses)
-            movieScaledPreviewImageView.show(poses: [teacherScaledPose], on: currentFrame, isFrameDraw: false)
+//            movieScaledPreviewImageView.show(poses: [teacherScaledPose], on: currentFrame, isFrameDraw: false)
             
             //座標データ？
-            videoPreviewImageView.show(poses: poses, on: currentFrame, isFrameDraw: true)
+            videoPreviewImageView.show(scaledPose: teacherScaledPose, studentPose: poses[0], on: currentFrame, isFrameDraw: true)
+            
+            //UILabel
+            ScoreLabel.text = String(teacherScaledPose.score)
             
             
         }else{
@@ -329,13 +333,15 @@ extension ViewController: PoseNetDelegate {
             
 //            print("teacher:",poses)
             //ここに入れる
-            //先生のポーズ
-            self.teacherPose = poses[0]
-            
-            //座標データ？
-            moviePreviewImageView.show(poses: poses, on: currentFrame, isFrameDraw: true)
+            // 先生のポーズ
+            if let firstPose = poses.first {
+                self.teacherPose = firstPose
 
-            
+                // moviePreviewImageView.show の呼び出しを修正
+                moviePreviewImageView.show(scaledPose: firstPose, studentPose: firstPose, on: currentFrame, isFrameDraw: true)
+            } else {
+                print("No pose available for moviePreviewImageView")
+            }
             
         }
     }

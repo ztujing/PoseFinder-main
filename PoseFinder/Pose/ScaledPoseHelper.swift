@@ -20,10 +20,10 @@ class ScaledPoseHelper {
         self.teacherPose = teacherPose;
         self.studentPose = studentPose;
         //先生のグラビティを計算
-        self.teacherCenterOfGravity = rawP("lSh")/*self.multiply(0.25, add(add(rawP("rSh"), rawP("lSh")),add(rawP("rHi"), rawP("lHi"))));*/
+        self.teacherCenterOfGravity = self.multiply(0.25, add(add(rawP("rSh"), rawP("lSh")),add(rawP("rHi"), rawP("lHi"))));
         print("teacherCenterOfGravity:",teacherCenterOfGravity)
         //生徒のグラビティを計算
-        self.studentCenterOfGravity = rawSP("lSh")/*self.multiply(0.25, add(add(rawSP("rSh"), rawSP("lSh")),add(rawSP("rHi"), rawSP("lHi"))));*/
+        self.studentCenterOfGravity = self.multiply(0.25, add(add(rawSP("rSh"), rawSP("lSh")),add(rawSP("rHi"), rawSP("lHi"))));
         print("studentCenterOfGravity:",studentCenterOfGravity)
     }
     func rePos (position:CGPoint?) -> CGPoint {
@@ -64,7 +64,7 @@ class ScaledPoseHelper {
         if (tLength == 0 ){
             return Pose()
         }
-        var tsRatio = 1.5 * sLength/tLength
+        var tsRatio = sLength/tLength
         print("tsRatio:",tsRatio)
         
         // 総合スコア
@@ -85,7 +85,7 @@ class ScaledPoseHelper {
                let sP = self.studentPose.joints[.rightShoulder]?.position {
                 
                 var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
-                print("rSh_(tP,sP,distance):",tP,sP,distance)
+//                print("rSh_(tP,sP,distance):",tP,sP,distance)
                 self.scaledPose.joints[.rightShoulder]?.score = max((scoreTh_rSh-distance)/scoreTh_rSh,0)
             }
         } else {
@@ -163,7 +163,7 @@ class ScaledPoseHelper {
                let sP = self.studentPose.joints[.rightHip]?.position {
                 
                 var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
-                print("rHi_(tP,sP,distance):",tP,sP,distance)
+//                print("rHi_(tP,sP,distance):",tP,sP,distance)
                 self.scaledPose.joints[.rightHip]?.score = max((scoreTh_rHi-distance)/scoreTh_rHi,0)
             }
             
@@ -234,7 +234,7 @@ class ScaledPoseHelper {
         var pos_lSh = self.multiply(ratio.originToLeftShoulder, p("lSh"))
         pos_lSh = self.multiply(tsRatio,pos_lSh)
         self.scaledPose.joints[.leftShoulder]?.position = rePos(position: pos_lSh)
-        print("***************lSh*****",p("lSh"),pos_lSh,rePos(position: pos_lSh),rawSP("lSh"))
+//        print("***************lSh*****",p("lSh"),pos_lSh,rePos(position: pos_lSh),rawSP("lSh"))
         if(pos_lSh != nil) {
             self.scaledPose.joints[.leftShoulder]?.confidence = 1.0
             self.scaledPose.joints[.leftShoulder]?.isValid =  true
@@ -293,7 +293,7 @@ class ScaledPoseHelper {
                let sP = self.studentPose.joints[.leftWrist]?.position {
                 
                 var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
-                //                print("distance:",distance)
+                //                ・・("distance:",distance)
                 self.scaledPose.joints[.leftWrist]?.score = max((scoreTh_lWr-distance)/scoreTh_lWr,0)
             }
         }else {
@@ -318,7 +318,7 @@ class ScaledPoseHelper {
                let sP = self.studentPose.joints[.leftHip]?.position {
                 
                 var distance = sqrt(pow(tP.x-sP.x,2)+pow(tP.y-sP.y,2))
-                print("lHi_(sP,tP,distance):",sP,tP,distance)
+//                print("lHi_(sP,tP,distance):",sP,tP,distance)
                 self.scaledPose.joints[.leftHip]?.score = max((scoreTh_lHi-distance)/scoreTh_lHi,0)
             }
         }else {
@@ -445,7 +445,7 @@ class ScaledPoseHelper {
         totalScore /= 14
         print("totalScore",totalScore)
     
-        
+        scaledPose.score = totalScore
         // 重心を計算して引き算
         
         return scaledPose
