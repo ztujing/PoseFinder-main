@@ -70,8 +70,27 @@ class ScaledPoseHelper {
         // 総合スコア
         var totalScore = 0.0
         
+
+        var scoreTh = 80.0  // 全ての関節の閾値を設定
+
+        var scoreTh_rSh = scoreTh  // 右肩
+        var scoreTh_rEl = scoreTh  // 右肘
+        var scoreTh_rWr = scoreTh  // 右手首
+        var scoreTh_rHi = scoreTh  // 右股関節
+        var scoreTh_rKn = scoreTh  // 右膝
+        var scoreTh_rAn = scoreTh  // 右足首
+        var scoreTh_lSh = scoreTh  // 左肩
+        var scoreTh_lEl = scoreTh  // 左肘
+        var scoreTh_lWr = scoreTh  // 左手首
+        var scoreTh_lHi = scoreTh  // 左股関節
+        var scoreTh_lKn = scoreTh  // 左膝
+        var scoreTh_lAn = scoreTh  // 左足首
+        var scoreTh_rEa = scoreTh  // 右耳
+        var scoreTh_lEa = scoreTh  // 左耳
+        
+        
         //rightShoulder
-        var scoreTh_rSh = 50.0
+        
         
         var pos_rSh = self.multiply(ratio.originToRightShoulder, p("rSh"))
         // scaledPoseがStudentPoseになるように比率を掛け算する
@@ -97,7 +116,6 @@ class ScaledPoseHelper {
         
         
         //rightElbow
-        var scoreTh_rEl = 50.0
         
         var pos_rEl = self.multiply(tsRatio,self.multiply(ratio.rightShoulderToRightElbow, self.sub(p("rEl"),p("rSh"))))
         pos_rEl = self.add(pos_rSh,pos_rEl)
@@ -124,7 +142,6 @@ class ScaledPoseHelper {
         
         
         //rightWrist
-        var scoreTh_rWr = 50.0
         
         var pos_rWr = self.multiply(tsRatio,multiply(ratio.rightElbowToRightWrist, self.sub(p("rWr"),p("rEl"))))
         pos_rWr = self.add(pos_rEl,pos_rWr)
@@ -150,7 +167,6 @@ class ScaledPoseHelper {
         totalScore += self.scaledPose.joints[.rightWrist]?.score ?? 0.0
         
         //rightHip
-        var scoreTh_rHi = 50.0
         
         var pos_rHi = self.multiply(ratio.originToRightHip, p("rHi"))
         pos_rHi = self.multiply(tsRatio,pos_rHi)
@@ -176,7 +192,6 @@ class ScaledPoseHelper {
         totalScore += self.scaledPose.joints[.rightHip]?.score ?? 0.0
         
         //rightKnee
-        var scoreTh_rKn = 50.0
         
         var pos_rKn = self.multiply(tsRatio,multiply(ratio.rightHipToRightKnee, self.sub(p("rKn"),p("rHi"))))
         pos_rKn = self.add(pos_rHi,pos_rKn)
@@ -201,7 +216,6 @@ class ScaledPoseHelper {
         totalScore += self.scaledPose.joints[.rightKnee]?.score ?? 0.0
         
         //rightAnkle
-        var scoreTh_rAn = 50.0
         
         var pos_rAn = self.multiply(tsRatio,multiply(ratio.rightKneeToRightAnkle, self.sub(p("rAn"),p("rKn"))))
         pos_rAn = self.add(pos_rKn,pos_rAn)
@@ -229,7 +243,6 @@ class ScaledPoseHelper {
         //left
         
         //leftShoulder
-        var scoreTh_lSh = 50.0
         
         var pos_lSh = self.multiply(ratio.originToLeftShoulder, p("lSh"))
         pos_lSh = self.multiply(tsRatio,pos_lSh)
@@ -255,7 +268,6 @@ class ScaledPoseHelper {
         totalScore += self.scaledPose.joints[.leftShoulder]?.score ?? 0.0
         
         //leftElbow
-        var scoreTh_lEl = 50.0
         
         var pos_lEl = self.multiply(tsRatio,multiply(ratio.leftShoulderToLeftElbow, self.sub(p("lEl"),p("lSh"))))
         pos_lEl = self.add(pos_lSh,pos_lEl)
@@ -280,7 +292,6 @@ class ScaledPoseHelper {
         totalScore += self.scaledPose.joints[.leftElbow]?.score ?? 0.0
         
         //leftWrist
-        var scoreTh_lWr = 50.0
         
         var pos_lWr = self.multiply(tsRatio,multiply(ratio.leftElbowToLeftWrist, self.sub(p("lWr"),p("lEl"))))
         pos_lWr = self.add(pos_lEl,pos_lWr)
@@ -305,7 +316,6 @@ class ScaledPoseHelper {
         totalScore += self.scaledPose.joints[.leftWrist]?.score ?? 0.0
         
         //leftHip
-        var scoreTh_lHi = 50.0
         
         var pos_lHi = self.multiply(ratio.originToLeftHip, p("lHi"))
         pos_lHi = self.multiply(tsRatio,pos_lHi)
@@ -330,7 +340,6 @@ class ScaledPoseHelper {
         totalScore += self.scaledPose.joints[.leftHip]?.score ?? 0.0
         
         //leftKnee
-        var scoreTh_lKn = 50.0
         
         var pos_lKn = self.multiply(tsRatio,multiply(ratio.leftHipToLeftKnee, self.sub(p("lKn"),p("lHi"))))
         pos_lKn = self.add(pos_lHi,pos_lKn)
@@ -356,7 +365,6 @@ class ScaledPoseHelper {
         
         
         //leftAnkle
-        var scoreTh_lAn = 50.0
         
         var pos_lAn = self.multiply(tsRatio,multiply(ratio.leftKneeToLeftAnkle, self.sub(p("lAn"),p("lKn"))))
         pos_lAn = self.add(pos_lKn,pos_lAn)
@@ -389,7 +397,6 @@ class ScaledPoseHelper {
         
         
         //rightEar
-        var scoreTh_rEa = 50.0
         
         var pos_rEa = self.multiply(tsRatio,multiply(ratio.midpointOfShouldersToRightEar, self.sub(p("rEa"),midpoint)))
         pos_rEa = self.add(pos_midpoint,pos_rEa)
@@ -415,7 +422,6 @@ class ScaledPoseHelper {
         
         
         //leftEar
-        var scoreTh_lEa = 50.0
         
         var pos_lEa = self.multiply(tsRatio,multiply(ratio.midpointOfShouldersToLeftEar, self.sub(p("lEa"),midpoint)))
         pos_lEa = self.add(pos_midpoint,pos_lEa)
