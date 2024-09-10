@@ -292,7 +292,7 @@ extension ViewController: PoseNetDelegate {
             let studentPose = poses[0]
 
             let scaledPoseHelper = ScaledPoseHelper(teacherPose: self.teacherPose,studentPose: studentPose)
-            var teacherScaledPose = scaledPoseHelper.getScaledPose()
+            var (teacherScaledPose,scoredStudentPose) = scaledPoseHelper.getScaledPose()
 
                 
                 //ここまでポーズ
@@ -305,7 +305,7 @@ extension ViewController: PoseNetDelegate {
 //            movieScaledPreviewImageView.show(poses: [teacherScaledPose], on: currentFrame, isFrameDraw: false)
             
             //座標データ？
-            videoPreviewImageView.show(scaledPose: teacherScaledPose, studentPose: poses[0], on: currentFrame, isFrameDraw: true)
+            videoPreviewImageView.show(scaledPose: teacherScaledPose, studentPose: scoredStudentPose, on: currentFrame, isFrameDraw: true)
             
             //UILabel
             ScoreLabel.text = String(teacherScaledPose.score)
