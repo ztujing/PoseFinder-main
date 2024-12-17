@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,7 @@
 		4AE8C3CF23AD2A74005F9953 /* CGImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8C3CE23AD2A74005F9953 /* CGImage+Extension.swift */; };
 		4AE8C3D123AD2D3B005F9953 /* PoseNetInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8C3D023AD2D3B005F9953 /* PoseNetInput.swift */; };
 		4AE8C3D323AD2D8A005F9953 /* PoseNetOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8C3D223AD2D8A005F9953 /* PoseNetOutput.swift */; };
+		4CAE58F0CB9F5537175E0C52 /* Pods_PoseFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F542372BE2B310E044948BE7 /* Pods_PoseFinder.framework */; };
 		6D12FCF22C04BAD7007F7CD3 /* PoseNetMobileNet100S8FP16.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6D12FCF12C04BAD7007F7CD3 /* PoseNetMobileNet100S8FP16.mlmodel */; };
 		6D1B1CC328CD64900013B0E1 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B1CC228CD64900013B0E1 /* PlayerView.swift */; };
 		6D2BDD8928968C0700AE55E9 /* traning.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6D820019287A463A00483910 /* traning.mp4 */; };
@@ -45,6 +46,7 @@
 		0DCEF2CA2416709B00ECEC99 /* PoseBuilder+Multiple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PoseBuilder+Multiple.swift"; sourceTree = "<group>"; };
 		0DCEF2CD241676C000ECEC99 /* PoseBuilderConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseBuilderConfiguration.swift; sourceTree = "<group>"; };
 		420B7A9F4BA833CE510130DA /* ACKNOWLEDGMENTS.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = ACKNOWLEDGMENTS.txt; sourceTree = "<group>"; };
+		45926716BFFD2EB28BE81815 /* Pods-PoseFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseFinder.release.xcconfig"; path = "Target Support Files/Pods-PoseFinder/Pods-PoseFinder.release.xcconfig"; sourceTree = "<group>"; };
 		4A0FC5BB23190AD6004886B9 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		4A2D05CD23BF9A2C00D002ED /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		4A2D05CF23BF9BBF00D002ED /* PopOverModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverModalViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,8 @@
 		6DD239412A5D93D90007D39A /* ScaledPoseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledPoseHelper.swift; sourceTree = "<group>"; };
 		6DD7A3152BF37F1A00079E4A /* bg_blue.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bg_blue.mp4; sourceTree = "<group>"; };
 		BEE6CF152B804A05BF905D20 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		E141FCF9BCE9A5F93433101C /* Pods-PoseFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseFinder.debug.xcconfig"; path = "Target Support Files/Pods-PoseFinder/Pods-PoseFinder.debug.xcconfig"; sourceTree = "<group>"; };
+		F542372BE2B310E044948BE7 /* Pods_PoseFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoseFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CAE58F0CB9F5537175E0C52 /* Pods_PoseFinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +133,8 @@
 				4A2D23AF22BB70E400494C55 /* Products */,
 				1E2F76EA3781C8213469E3A0 /* Configuration */,
 				0D8A71B927BDB43FD8F91908 /* LICENSE */,
+				5387E8F6B9E446E933610DC7 /* Pods */,
+				F9D56038BEBD5368191876E8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -170,6 +177,15 @@
 			path = "Extensions+Types";
 			sourceTree = "<group>";
 		};
+		5387E8F6B9E446E933610DC7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E141FCF9BCE9A5F93433101C /* Pods-PoseFinder.debug.xcconfig */,
+				45926716BFFD2EB28BE81815 /* Pods-PoseFinder.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6594E5192345489C00D3C44D /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +223,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		F9D56038BEBD5368191876E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F542372BE2B310E044948BE7 /* Pods_PoseFinder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -214,9 +238,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A2D23C222BB70E500494C55 /* Build configuration list for PBXNativeTarget "PoseFinder" */;
 			buildPhases = (
+				B0DCB73F307FE68045D52A4B /* [CP] Check Pods Manifest.lock */,
 				4A2D23AA22BB70E400494C55 /* Sources */,
 				4A2D23AB22BB70E400494C55 /* Frameworks */,
 				4A2D23AC22BB70E400494C55 /* Resources */,
+				5DF32F87E8206693E122059D /* [CP] Embed Pods Frameworks */,
+				0CCDBC180AEF41F1755A469D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -275,6 +302,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0CCDBC180AEF41F1755A469D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PoseFinder/Pods-PoseFinder-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PoseFinder/Pods-PoseFinder-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PoseFinder/Pods-PoseFinder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DF32F87E8206693E122059D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PoseFinder/Pods-PoseFinder-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PoseFinder/Pods-PoseFinder-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PoseFinder/Pods-PoseFinder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0DCB73F307FE68045D52A4B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PoseFinder-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4A2D23AA22BB70E400494C55 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -330,7 +416,6 @@
 /* Begin XCBuildConfiguration section */
 		4A2D23C022BB70E500494C55 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEE6CF152B804A05BF905D20 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -392,7 +477,6 @@
 		};
 		4A2D23C122BB70E500494C55 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEE6CF152B804A05BF905D20 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -448,7 +532,7 @@
 		};
 		4A2D23C322BB70E500494C55 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEE6CF152B804A05BF905D20 /* SampleCode.xcconfig */;
+			baseConfigurationReference = E141FCF9BCE9A5F93433101C /* Pods-PoseFinder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -458,7 +542,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.posefinder${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hotmail.tujing-.apple-samplecode.posefinder";
 				PRODUCT_NAME = PoseFinder;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -468,7 +552,7 @@
 		};
 		4A2D23C422BB70E500494C55 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEE6CF152B804A05BF905D20 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 45926716BFFD2EB28BE81815 /* Pods-PoseFinder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -478,7 +562,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.posefinder${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hotmail.tujing-.apple-samplecode.posefinder";
 				PRODUCT_NAME = PoseFinder;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

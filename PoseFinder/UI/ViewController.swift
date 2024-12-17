@@ -9,6 +9,9 @@ The implementation of the application's view controller, responsible for coordin
 import AVFoundation
 import UIKit
 import VideoToolbox
+// 追加
+import MLKitPoseDetection
+import MLKitVision
 
 extension CIImage {
     func toCGImage() -> CGImage? {
@@ -74,8 +77,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var ScoreLabel: UILabel!
     private let videoCapture = VideoCapture()
 
-    private var videoPoseNet: PoseNet!
-    private var moviePoseNet: PoseNet!
+//    private var videoPoseNet: PoseNet!
+//    private var moviePoseNet: PoseNet!
+ 
+    // 変更
+    private var videoPoseDetector: PoseDetector!
+    private var moviePoseDetector: PoseDetector!
 
     /// The frame the PoseNet model is currently making pose predictions from.
     private var videoCurrentFrame: CGImage?
@@ -103,17 +110,19 @@ class ViewController: UIViewController {
       // For convenience, the idle timer is disabled to prevent the screen from locking.
       UIApplication.shared.isIdleTimerDisabled = true
 
-      do {
-          videoPoseNet = try PoseNet(type: "video")
-          moviePoseNet = try PoseNet(type: "movie")
+//      do {
+//          videoPoseNet = try PoseNet(type: "video")
+//          moviePoseNet = try PoseNet(type: "movie")
+//
+//      } catch {
+//        fatalError("Failed to load model. \(error.localizedDescription)")
+//      }
 
-      } catch {
-        fatalError("Failed to load model. \(error.localizedDescription)")
-      }
-
-      videoPoseNet.delegate = self
-      moviePoseNet.delegate = self
+//      videoPoseNet.delegate = self
+//      moviePoseNet.delegate = self
         
+    // 追加
+      setupPoseDetectors()
       setupAndBeginCapturingVideoFrames()
       setupAndBeginCapturingMovieFrames()
     }
@@ -124,6 +133,16 @@ class ViewController: UIViewController {
         
         videoPreviewImageView.frame = view.bounds
         movieScaledPreviewImageView.frame = view.bounds
+    }
+    
+    // 追加
+    private func setupPoseDetectors(){
+        let options = PoseDetectorOptions()
+        options.detectorMode = .stream
+        
+        videoPoseDetector = PoseDetector.poseDetector(options: options)
+        moviePoseDetector = PoseDetector.poseDetector(options: options)
+        
     }
     
     private func setupAndBeginCapturingMovieFrames() {
@@ -254,9 +273,23 @@ extension ViewController: VideoCaptureDelegate {
         guard let image = capturedImage else {
             fatalError("Captured image is null")
         }
+        
+        //CGImage to UIImage
+        let uiImage = UIImage(cgImage: image)
+        
+        //UIImage to VisionImage
+        let visionImage = VisionImage(image: uiImage)
+        // visionImage.orientation = .up
 
-        videoCurrentFrame = image
-        videoPoseNet.predict(image)
+        // 消す
+//        videoCurrentFrame = image
+//        videoPoseNet.predict(image)
+        
+        // 画像を処理する
+        videoPoseDetector.process(visionImage) {_,_ in
+            //ここまだ
+        }
+        
     }
 }
 
